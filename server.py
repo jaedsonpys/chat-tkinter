@@ -24,13 +24,19 @@ class Server:
         """
 
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
-        self._sock.listen(50)
-
         self._sock.bind((host, port))
 
+        self._sock.listen(50)
+
         Thread(target=self._accept_connection).start()
+        Thread(target=self._receive_messages).start()
 
     def _accept_connection(self) -> None:
         while True:
             client, addr = self._sock.accept()
             self.conn_clients.append(client)
+
+
+if __name__ == '__main__':
+    app = Server()
+    app.run(host='127.0.0.1')
