@@ -1,7 +1,10 @@
 import socket
+from threading import Thread
 
 
 class Server:
+    conn_clients = []
+
     def __init__(self):
         self._sock = None
 
@@ -24,3 +27,10 @@ class Server:
         self._sock.listen(50)
 
         self._sock.bind((host, port))
+
+        Thread(target=self._accept_connection).start()
+
+    def _accept_connection(self) -> None:
+        while True:
+            client, addr = self._sock.accept()
+            self.conn_clients.append(client)
