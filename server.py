@@ -1,12 +1,19 @@
 import socket
 from threading import Thread
 
+import json
+
 
 class Server:
-    conn_clients = []
+    clients = []
 
     def __init__(self):
         self._sock = None
+
+    @staticmethod
+    def _decode_message(message: bytes) -> dict:
+        message_json = json.loads(message)
+        return message_json
 
     def run(
         self,
