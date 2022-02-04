@@ -38,6 +38,12 @@ class Server:
     def _receive_messages(self):
         while True:
             msg, client = self._sock.recvfrom(1024)
+            message = self._decode_message(msg)
+
+            if message['type'] == 'register':
+                pass
+            elif message['type'] == 'message':
+                pass
 
 
 if __name__ == '__main__':
