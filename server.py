@@ -58,7 +58,7 @@ class Server:
 
     def _receive_connections(self) -> None:
         while True:
-            msg, addr = self._sock.recvfrom(1024)
+            msg, addr = self._sock.recvfrom(5024)
             message = self._decode_message(msg)
 
             address = f'{addr[0]}:{addr[1]}'
@@ -73,4 +73,4 @@ class Server:
 
 if __name__ == '__main__':
     app = Server()
-    app.run(host='127.0.0.1')
+    app.run()
