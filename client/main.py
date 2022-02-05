@@ -1,6 +1,13 @@
 from tkinter import *
 from tkinter import messagebox
 
+
+def register():
+    global name_entry
+    username = name_entry.get()
+
+    print(username)
+
 root = Tk()
 
 root.geometry('400x400')
@@ -17,7 +24,7 @@ Label(set_name_frame, text='Seu nome').grid(row=1, column=1)
 name_entry = Entry(set_name_frame)
 name_entry.grid(row=1, column=2)
 
-Button(set_name_frame, text='Salvar').grid(row=1, column=3)
+Button(set_name_frame, text='Salvar', command=register).grid(row=1, column=3)
 
 set_name_frame.grid_columnconfigure(1, weight=1)
 set_name_frame.grid(row=0, column=0)
