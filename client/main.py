@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import messagebox
 
 from client_conn import Client
+from threading import Thread
 
 client_api = Client()
 
@@ -27,6 +28,17 @@ def send_message():
 
     client_api.send_message(message)
     message_entry.delete(0, END)
+
+
+def render_message():
+    while True:
+        global message_list
+    
+        sender, message = client_api.receive_broadcast()
+        full = f'{sender}: {message}'
+
+        message_list.insert(END, full)
+
 
 root = Tk()
 
@@ -70,4 +82,5 @@ message_entry.pack(side=LEFT)
 
 Button(send_message_frame, text='Enviar', command=send_message).pack()
 
+Thread(target=render_message).start()
 root.mainloop()
