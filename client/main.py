@@ -12,6 +12,16 @@ def register():
 
     print(username)
 
+
+def send_message():
+    global message_entry
+    message = message_entry.get()
+
+    if len(message) < 1:
+        return
+
+    message_entry.delete(0, END)
+
 root = Tk()
 
 root.geometry('400x400')
