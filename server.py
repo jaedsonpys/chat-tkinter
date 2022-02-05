@@ -63,13 +63,15 @@ class Server:
             address = f'{addr[0]}:{addr[1]}'
             type = message['type']
 
-            if type == 'register':
+            if type == 'ping':
+                self._sock.sendto('pong', addr)
+            elif type == 'register':
                 username = message['username']
                 self._register_user(username, address)
             elif type == 'message':
                 content = message['content']
                 self._broadcast_message(content, address)
-                
+
 
 if __name__ == '__main__':
     app = Server()
