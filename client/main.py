@@ -45,4 +45,13 @@ message_list = Listbox(
 message_frame.grid(row=2, sticky='nesw')
 message_list.pack(fill=BOTH, expand=True, pady=10, padx=10)
 
+# send_message_frame
+send_message_frame = Frame(message_frame, height=30)
+send_message_frame.pack(fill=X, expand=True, pady=1, padx=10)
+
+message_entry = Entry(send_message_frame, background='white', width=40)
+message_entry.pack(side=LEFT)
+
+Button(send_message_frame, text='Enviar').pack()
+
 root.mainloop()
