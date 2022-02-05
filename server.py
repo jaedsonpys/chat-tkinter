@@ -1,3 +1,4 @@
+from http import client
 import socket
 from threading import Thread
 
@@ -5,7 +6,7 @@ import json
 
 
 class Server:
-    clients = []
+    clients = {}
 
     def __init__(self):
         self._sock = None
@@ -35,7 +36,16 @@ class Server:
 
         Thread(target=self._receive_messages).start()
 
-    def _receive_messages(self):
+    def _register_user(
+        self,
+        username: str,
+        address: str,
+        socket: socket.SocketType
+    ) -> None:
+        client_info = [username, socket]
+        self.clients[address] = client_info
+
+    def _receive_messages(self) -> None:
         while True:
             msg, client = self._sock.recvfrom(1024)
             message = self._decode_message(msg)
