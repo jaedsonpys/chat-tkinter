@@ -34,24 +34,21 @@ class Server:
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self._sock.bind((host, port))
 
-        Thread(target=self._receive_messages).start()
+        Thread(target=self._receive_connections).start()
 
-    def _register_user(
-        self,
-        username: str,
-        address: str,
-        socket: socket.SocketType
-    ) -> None:
-        client_info = [username, socket]
-        self.clients[address] = client_info
+    def _register_user(self, username: str, address: str,) -> None:
+        self.clients[address] = username
 
-    def _receive_messages(self) -> None:
+    def _receive_connections(self) -> None:
         while True:
-            msg, client = self._sock.recvfrom(1024)
+            msg, addr = self._sock.recvfrom(1024)
             message = self._decode_message(msg)
 
+            address = ':'.join(addr)
+
             if message['type'] == 'register':
-                pass
+                username = message['username']
+                self._register_user(username, address)
             elif message['type'] == 'message':
                 pass
 
