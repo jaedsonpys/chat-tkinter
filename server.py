@@ -61,7 +61,8 @@ class Server:
                 username = message['username']
                 self._register_user(username, address)
             elif message['type'] == 'message':
-                pass
+                content = msg['content']
+                self._broadcast_message(content, address)
 
 
 if __name__ == '__main__':
