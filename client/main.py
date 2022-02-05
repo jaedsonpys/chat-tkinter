@@ -62,6 +62,6 @@ send_message_frame.pack(fill=X, expand=True, pady=1, padx=10)
 message_entry = Entry(send_message_frame, background='white', width=40)
 message_entry.pack(side=LEFT)
 
-Button(send_message_frame, text='Enviar').pack()
+Button(send_message_frame, text='Enviar', command=send_message).pack()
 
 root.mainloop()
