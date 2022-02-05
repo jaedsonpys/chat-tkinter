@@ -11,7 +11,7 @@ class Client:
         message_json = json.dumps({'type': 'message',
                         'content': message}, ensure_ascii=False)
 
-        self._sock.sendto(message.encode(), self.addr)
+        self._sock.sendto(message_json.encode(), self.addr)
 
     def receive_broadcast(self):
         message = self._sock.recv(5024)
