@@ -6,6 +6,10 @@ def register():
     global name_entry
     username = name_entry.get()
 
+    if len(username) < 1:
+        messagebox.showwarning('Aviso', 'Insira um nome de usuário.')
+        return
+
     print(username)
 
 root = Tk()
