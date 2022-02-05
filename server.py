@@ -61,14 +61,15 @@ class Server:
             message = self._decode_message(msg)
 
             address = f'{addr[0]}:{addr[1]}'
+            type = message['type']
 
-            if message['type'] == 'register':
+            if type == 'register':
                 username = message['username']
                 self._register_user(username, address)
-            elif message['type'] == 'message':
+            elif type == 'message':
                 content = message['content']
                 self._broadcast_message(content, address)
-
+                
 
 if __name__ == '__main__':
     app = Server()
