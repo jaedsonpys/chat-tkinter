@@ -31,10 +31,14 @@ class Server:
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self._sock.bind((host, port))
 
+        print('\033[1mChat Tkinter - @jaedsonpys\033[m')
+        print('\033[32m     * Server is started\033[m')
+
         self._receive_connections()
 
     def _register_user(self, username: str, address: str,) -> None:
-        self.clients[address] = username
+        self.clients[address] = username    
+        print(f'    * {address} - Joined the chat')
 
     def _broadcast_message(self, message: str, sender_addr: str) -> None:
         sender = self.clients.get(sender_addr)
