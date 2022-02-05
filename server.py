@@ -41,13 +41,15 @@ class Server:
 
         message_info = {'type': 'message', 
                         'sender': sender,
-                        'message': message}
+                        'content': message}
 
         message_json = json.dumps(message_info, ensure_ascii=False)
 
         for addr in self.clients.keys():
             if addr != sender_addr:
-                address = addr.split(':')
+                host, port = addr.split(':')
+                address = (host, int(port))
+
                 self._sock.sendto(message_json.encode(), address)
 
     def _receive_connections(self) -> None:
