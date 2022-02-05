@@ -1,6 +1,10 @@
 from tkinter import *
 from tkinter import messagebox
 
+from client_conn import Client
+
+client_api = Client()
+
 
 def register():
     global name_entry
@@ -11,6 +15,7 @@ def register():
         return
 
     print(username)
+    client_api.register_user(username)
 
 
 def send_message():
@@ -20,6 +25,7 @@ def send_message():
     if len(message) < 1:
         return
 
+    client_api.send_message(message)
     message_entry.delete(0, END)
 
 root = Tk()
