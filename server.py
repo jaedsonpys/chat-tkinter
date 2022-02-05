@@ -1,7 +1,4 @@
-from http import client
 import socket
-from threading import Thread
-
 import json
 
 
@@ -34,7 +31,7 @@ class Server:
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self._sock.bind((host, port))
 
-        Thread(target=self._receive_connections).start()
+        self._receive_connections()
 
     def _register_user(self, username: str, address: str,) -> None:
         self.clients[address] = username
