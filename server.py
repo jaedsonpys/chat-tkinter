@@ -57,13 +57,13 @@ class Server:
             msg, addr = self._sock.recvfrom(1024)
             message = self._decode_message(msg)
 
-            address = ':'.join(addr)
+            address = f'{addr[0]}:{addr[1]}'
 
             if message['type'] == 'register':
                 username = message['username']
                 self._register_user(username, address)
             elif message['type'] == 'message':
-                content = msg['content']
+                content = message['content']
                 self._broadcast_message(content, address)
 
 
