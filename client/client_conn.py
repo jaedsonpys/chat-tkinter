@@ -13,7 +13,11 @@ class Client:
 
         # wait response
         self._sock.settimeout(3.0)
-        pong = self._sock.recv(1024).decode()
+
+        try:
+            pong = self._sock.recv(1024).decode()
+        except (socket.timeout, BrokenPipeError):
+            return False
 
         if pong != 'pong':
             return False
