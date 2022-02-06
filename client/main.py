@@ -5,6 +5,7 @@ from client_conn import Client
 from threading import Thread
 
 client_api = Client()
+is_registred = False
 
 
 def register():
@@ -20,6 +21,10 @@ def register():
 
 
 def send_message():
+    if not is_registred:
+        messagebox.showerror('Erro', 'É necessário informar um nome.')
+        return
+
     global message_entry
     message = message_entry.get()
 
