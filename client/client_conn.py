@@ -3,10 +3,11 @@ import json
 
 
 class Client:
-    def __init__(self) -> bool:
+    def __init__(self):
         self._sock = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
         self.addr = ('192.168.0.111', 3000)
 
+    def ping(self):
         # ping server
         ping = json.dumps({'type': 'ping'})
         self._sock.sendto(ping.encode(), self.addr)
