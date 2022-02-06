@@ -85,5 +85,8 @@ Button(send_message_frame, text='Enviar', command=send_message).pack()
 if not client_api:
     messagebox.showerror('Erro', 'Servidor indisponível')
 
-Thread(target=render_message).start()
+render_thread = Thread(target=render_message)
+render_thread.setDaemon(True)
+render_thread.start()
+
 root.mainloop()
