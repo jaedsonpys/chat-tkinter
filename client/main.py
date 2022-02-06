@@ -82,7 +82,7 @@ message_entry.pack(side=LEFT)
 
 Button(send_message_frame, text='Enviar', command=send_message).pack()
 
-if not client_api:
+if not client_api.ping():
     messagebox.showerror('Erro', 'Servidor indisponível')
 
 render_thread = Thread(target=render_message)
