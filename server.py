@@ -64,7 +64,7 @@ class Server:
             type = message['type']
 
             if type == 'ping':
-                self._sock.sendto('pong', addr)
+                self._sock.sendto('pong'.encode(), addr)
             elif type == 'register':
                 username = message['username']
                 self._register_user(username, address)
