@@ -14,16 +14,20 @@ class Client:
 
         # wait response
         self._sock.settimeout(3.0)
+        server_on = None
 
         try:
             pong = self._sock.recv(1024).decode()
         except (socket.timeout, BrokenPipeError):
-            return False
+            server_on = False
+        else:
+            if pong != 'pong':
+                server_on = False
 
-        if pong != 'pong':
-            return False
+            server_on = True
 
-        return True
+        self._sock.settimeout(None)
+        return server_on
 
     def register_user(self, username: str):
         message_json = json.dumps({'type': 'register', 'username': username}, ensure_ascii=False)
