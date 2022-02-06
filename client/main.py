@@ -10,6 +10,8 @@ is_registred = False
 
 def register():
     global name_entry
+    global is_registred
+
     username = name_entry.get()
 
     if len(username) < 1:
@@ -18,14 +20,17 @@ def register():
 
     print(username)
     client_api.register_user(username)
+    is_registred = True
 
 
 def send_message():
+    global is_registred
+    global message_entry
+
     if not is_registred:
         messagebox.showerror('Erro', 'É necessário informar um nome.')
         return
 
-    global message_entry
     message = message_entry.get()
 
     if len(message) < 1:
